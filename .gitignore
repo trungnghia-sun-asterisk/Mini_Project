@@ -8,3 +8,4 @@ data/
 *.local.yml
 *.local.yaml
 *.local.properties
+docs/
