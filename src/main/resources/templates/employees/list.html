@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Employees | Employee Management</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<header class="navbar">
+    <div class="container nav-content">
+        <a class="brand" th:href="@{/employees/list}">Employee Management</a>
+        <nav class="nav-links">
+            <a th:href="@{/employees/list}">Employees</a>
+            <a th:href="@{/employees/statistics}">Statistics</a>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="button secondary">Logout</button>
+            </form>
+        </nav>
+    </div>
+</header>
+<main class="container">
+    <div th:if="${successMessage}" class="alert success" th:text="${successMessage}"></div>
+    <div th:if="${errorMessage}" class="alert error" th:text="${errorMessage}"></div>
+    <div class="page-heading">
+        <div>
+            <h1>Employees</h1>
+            <p>Search and manage the employee directory.</p>
+        </div>
+        <a sec:authorize="hasRole('ADMIN')" class="button" th:href="@{/employees/add}">Add employee</a>
+    </div>
+
+    <section class="card">
+        <form class="search-grid" th:action="@{/employees/list}" method="get">
+            <label class="field">Name
+                <input type="search" name="name" th:value="${searchName}" placeholder="Search by name">
+            </label>
+            <label class="field">Department
+                <select name="departmentId">
+                    <option value="">All departments</option>
+                    <option th:each="department : ${departments}"
+                            th:value="${department.id}"
+                            th:text="${department.name}"
+                            th:selected="${department.id == searchDepartmentId}"></option>
+                </select>
+            </label>
+            <div class="actions">
+                <button type="submit">Search</button>
+                <a class="button secondary" th:href="@{/employees/list}">Reset</a>
+            </div>
+        </form>
+    </section>
+
+    <section class="card">
+        <table>
+            <thead>
+            <tr><th>Name</th><th>Email</th><th>Department</th><th sec:authorize="hasRole('ADMIN')">Actions</th></tr>
+            </thead>
+            <tbody>
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.name}">Employee name</td>
+                <td th:text="${employee.email}">employee@example.com</td>
+                <td th:text="${employee.departmentName}">Department</td>
+                <td sec:authorize="hasRole('ADMIN')">
+                    <div class="actions">
+                        <a class="button secondary" th:href="@{/employees/{id}/edit(id=${employee.id})}">Edit</a>
+                        <form th:action="@{/employees/{id}/delete(id=${employee.id})}" method="post">
+                            <button class="danger" type="submit">Delete</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(employees)}"><td colspan="4">No employees found.</td></tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>

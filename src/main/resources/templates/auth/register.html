@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register | Employee Management</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<main class="container">
+    <div class="card form" style="margin: 5rem auto 0">
+        <h1>Create account</h1>
+        <form th:action="@{/register}" th:object="${registration}" method="post">
+            <div th:if="${#fields.hasGlobalErrors()}" class="alert error"><p th:each="error : ${#fields.globalErrors()}" th:text="${error}"></p></div>
+            <label class="field">Username
+                <input type="text" th:field="*{username}" autofocus>
+                <span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+            </label>
+            <label class="field">Password
+                <input type="password" th:field="*{password}">
+                <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            </label>
+            <button type="submit">Register</button>
+        </form>
+        <p>Already registered? <a th:href="@{/login}">Sign in</a></p>
+    </div>
+</main>
+</body>
+</html>

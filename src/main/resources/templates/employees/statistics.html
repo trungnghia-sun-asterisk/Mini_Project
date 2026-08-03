@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Statistics | Employee Management</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<header class="navbar"><div class="container nav-content"><a class="brand" th:href="@{/employees/list}">Employee Management</a><nav class="nav-links"><a th:href="@{/employees/list}">Employees</a><a th:href="@{/employees/statistics}">Statistics</a></nav></div></header>
+<main class="container">
+    <div class="page-heading"><div><h1>Employee statistics</h1><p>Current directory overview by department.</p></div><a class="button secondary" th:href="@{/employees/list}">Back to employees</a></div>
+    <section class="card"><div class="stat" th:text="${totalEmployees}">0</div><div>Total employees</div></section>
+    <section class="card">
+        <h2>Employees by department</h2>
+        <table>
+            <thead><tr><th>Department</th><th>Employee count</th></tr></thead>
+            <tbody>
+            <tr th:each="report : ${departmentReports}"><td th:text="${report.departmentName}">Department</td><td th:text="${report.employeeCount}">0</td></tr>
+            <tr th:if="${#lists.isEmpty(departmentReports)}"><td colspan="2">No department data found.</td></tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>

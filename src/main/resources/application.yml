@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: employee-management
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+  cache:
+    type: caffeine
+    cache-names:
+      - employeeTotal
+    caffeine:
+      spec: maximumSize=100,expireAfterWrite=60s
+  thymeleaf:
+    encoding: UTF-8
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,caches
+  endpoint:
+    health:
+      show-details: when-authorized
+
+logging:
+  level:
+    com.example.employeemanagement: INFO
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:}
+    expiration-ms: ${JWT_EXPIRATION_MS:3600000}

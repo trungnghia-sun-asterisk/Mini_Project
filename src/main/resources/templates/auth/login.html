@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login | Employee Management</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<main class="container">
+    <div class="card form" style="margin: 5rem auto 0">
+        <h1>Employee Management</h1>
+        <p>Sign in to continue.</p>
+        <div th:if="${param.error}" class="alert error">Invalid username or password.</div>
+        <div th:if="${param.logout}" class="alert success">You have been signed out.</div>
+        <div th:if="${param.registered}" class="alert success">Registration complete. Please sign in.</div>
+        <form th:action="@{/login}" method="post">
+            <label class="field">Username<input type="text" name="username" required autofocus></label>
+            <label class="field">Password<input type="password" name="password" required></label>
+            <button type="submit">Sign in</button>
+        </form>
+        <p>New user? <a th:href="@{/register}">Create an account</a></p>
+    </div>
+</main>
+</body>
+</html>
