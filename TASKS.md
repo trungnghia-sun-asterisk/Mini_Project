@@ -464,9 +464,9 @@ Xây dựng hoàn chỉnh hệ thống **Employee Management System** bằng:
 - [x] Kiểm tra scheduler
 - [x] Kiểm tra cache
 - [x] Cập nhật trạng thái task trong file này
-- [ ] Commit code
-- [ ] Push lên GitHub
-- [ ] Kiểm tra repository GitHub sau khi push
+- [x] Commit code
+- [x] Push lên GitHub
+- [x] Kiểm tra repository GitHub sau khi push
 
 ---
 
@@ -496,5 +496,5 @@ Project chỉ được coi là hoàn thành khi:
 - [x] Build pass
 - [x] README hoàn chỉnh
 - [x] Không có secret
-- [ ] Code đã commit
-- [ ] Code đã push lên GitHub
+- [x] Code đã commit
+- [x] Code đã push lên GitHub
