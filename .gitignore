@@ -8,4 +8,4 @@ data/
 *.local.yml
 *.local.yaml
 *.local.properties
-docs/
+# docs/ is intentionally tracked (AGENT.md, TASKS.md, etc.)
